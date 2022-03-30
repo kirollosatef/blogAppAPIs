@@ -1,4 +1,4 @@
-let sequelize = require("./sequelize.connection");
+let sequelize = require("./sequelize.connection.js");
 let createTables = () => {
   sequelize
     .sync()

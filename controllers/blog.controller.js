@@ -1,33 +1,36 @@
-let Blog = require("./blog.model").blog;
-let User = require("./blog.model").user;
+let Blog = require("../models/blog.model");
 const { Op } = require("sequelize");
 
 let getAllBlogs = async (req, res) => {
-  let blogsData = await Blog.findAll({});
-  let usersData = await User.findAll({});
-  res.render("allBlogs.ejs", { allBlogs: blogsData, allUsers: usersData });
+  let blogsData = await Blog.findAll({
+    attributes: ["id", "title", "content"],
+  });
+  res.status(200).json({ message: "Success!!", allBlogs: blogsData });
 };
 
 let addNewBlog = async (req, res) => {
-  let user = await User.findOne({
-    where: { uName: { [Op.like]: `%${req.body.userName}%` } },
-  });
-  console.log(user);
+  let data = req.body;
   await Blog.create({
-    title: req.body.title,
-    content: req.body.content,
-    author: user.id,
+    title: data.title,
+    content: data.content,
   });
-  res.redirect("/");
+  let blogsData = await Blog.findAll({
+    attributes: ["id", "title", "content"],
+  });
+  res.status(200).json({ message: "Added!!", allBlogs: blogsData });
 };
 
 let updateBlog = async (req, res) => {
-  let targetId = req.body.blogId;
+  let targetId = req.params.id;
+  let data = req.body;
   await Blog.update(
-    { title: req.body.newTitle, content: req.body.newContent },
+    { title: data.title, content: data.content },
     { where: { id: targetId } }
   );
-  res.redirect("/");
+  let blogsData = await Blog.findAll({
+    attributes: ["id", "title", "content"],
+  });
+  res.status(200).json({ message: "Updated!!", allBlogs: blogsData });
 };
 
 let deleteBlog = async (req, res) => {

@@ -1,26 +1,22 @@
 let connection = require("../middleware/sequelize.connection");
 let sequelize = require("sequelize");
 
-let user = connection.define("users", {
-  uName: sequelize.STRING,
-  uEmail: sequelize.STRING,
-  uPhone: sequelize.STRING,
-  uPassword: sequelize.STRING,
-});
-
 let blog = connection.define("blogs", {
   title: sequelize.STRING,
   content: sequelize.STRING,
-  author: {
-    type: sequelize.INTEGER,
-    references: {
-      model: "users",
-      Key: "id",
-    },
-  },
 });
 
-module.exports = {
-  blog,
-  user,
-};
+module.exports = blog;
+
+// INSERT INTO `blogs`(`title`, `content`)
+// VALUES('blog 1234', 'lorem ipsum dolor sit amet consectetur adipisicing elit.');
+// INSERT INTO `blogs`(`title`, `content`)
+// VALUES('blog 4532', 'lorem ipsum dolor sit amet consectetur adipisicing elit.');
+// INSERT INTO `blogs`(`title`, `content`)
+// VALUES('blog 4536', 'lorem ipsum dolor sit amet consectetur adipisicing elit.');
+// INSERT INTO `blogs`(`title`, `content`)
+// VALUES('blog 6134', 'lorem ipsum dolor sit amet consectetur adipisicing elit.');
+// INSERT INTO `blogs`(`title`, `content`)
+// VALUES('blog 5678', 'lorem ipsum dolor sit amet consectetur adipisicing elit.');
+// INSERT INTO `blogs`(`title`, `content`)
+// VALUES('blog 1233', 'lorem ipsum dolor sit amet consectetur adipisicing elit.');

@@ -7,13 +7,13 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js"
   },
-  "author": "",
+  "author": "kirollosAtef",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.3",
+    "mysql2": "^2.3.3",
     "sequelize": "^6.17.0"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kirollosatef/blogAppAPIs.git"
