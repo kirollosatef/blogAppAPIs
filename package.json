@@ -1,7 +1,7 @@
 {
-  "name": "BlogApp",
+  "name": "blogapp",
   "version": "1.0.0",
-  "description": "",
+  "description": "Blog App APIs usiong Node.js , Express and MySQL , Sequelize",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,10 +10,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.19.2",
-    "ejs": "^3.1.6",
     "express": "^4.17.3",
-    "mysql2": "^2.3.3",
     "sequelize": "^6.17.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kirollosatef/blogAppAPIs.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/kirollosatef/blogAppAPIs/issues"
+  },
+  "homepage": "https://github.com/kirollosatef/blogAppAPIs#readme"
 }
