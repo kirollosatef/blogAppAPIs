@@ -5,7 +5,7 @@ let getAllBlogs = async (req, res) => {
   let blogsData = await Blog.findAll({
     attributes: ["id", "title", "content"],
   });
-  res.status(200).json({ message: "Success!!", allBlogs: blogsData });
+  res.render("allBlogs.ejs", { allBlogs: blogsData });
 };
 
 let addNewBlog = async (req, res) => {
@@ -14,47 +14,41 @@ let addNewBlog = async (req, res) => {
     title: data.title,
     content: data.content,
   });
-  let blogsData = await Blog.findAll({
-    attributes: ["id", "title", "content"],
-  });
-  res.status(200).json({ message: "Added!!", allBlogs: blogsData });
-};
-
-let updateBlog = async (req, res) => {
-  let targetId = req.params.id;
-  let data = req.body;
-  await Blog.update(
-    { title: data.title, content: data.content },
-    { where: { id: targetId } }
-  );
-  let blogsData = await Blog.findAll({
-    attributes: ["id", "title", "content"],
-  });
-  res.status(200).json({ message: "Updated!!", allBlogs: blogsData });
+  res.redirect("/getAllBlogs");
 };
 
 let deleteBlog = async (req, res) => {
   let targetId = req.body.blogId;
   await Blog.destroy({ where: { id: targetId } });
-  res.redirect("/");
+  res.redirect("/getAllBlogs");
 };
 
-let getBlogId = async (req, res) => {
-  let requireId = req.params.id;
-  let blog = await Blog.findOne({
-    where: { id: { [Op.like]: `%${requireId}%` } },
+let updateBlog = async (req, res) => {
+  let targetId = req.body.blogId;
+  let data = req.body;
+  await Blog.update(
+    { title: data.title, content: data.content },
+    { where: { id: targetId } }
+  );
+  res.redirect("/getAllBlogs");
+};
+
+let searchTitle = async (req, res) => {
+  let blogTitle = req.body.titleToSearch;
+  let blogsData = await Blog.findAll({
+    where: { title: { [Op.like]: `%${blogTitle}%` } },
   });
-  if (blog) {
-    res.render("blog.ejs", { title: blog.title, blogIdContent: blog });
+  if (blogsData.length > 1) {
+    res.render("searchBlog.ejs", { allBlogs: blogsData });
   } else {
     res.render("notFound.ejs");
   }
 };
 
-let searchTitle = async (req, res) => {
-  let data = req.body;
-  let blog = await Blog.findOne({
-    where: { title: { [Op.like]: `%${data.blogTitle}%` } },
+let getBlogId = async (req, res) => {
+  let requireId = req.b.id;
+  let all = await Blog.findAll({
+    where: { id: { [Op.substring]: `%${requireId}%` } },
   });
   if (blog) {
     res.render("blog.ejs", { title: blog.title, blogIdContent: blog });

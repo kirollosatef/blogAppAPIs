@@ -1,0 +1,81 @@
+<%-include("./header.ejs")%>
+<nav>
+  <p align="center" class="title">
+    <span style="color: #870058; font-weight: bold">A</span>
+    <span style="color: #cf1d35">l</span>
+    <span style="color: #f4b35f; font-weight: bold">l</span>
+    <span style="color: #fe5d26; font-weight: bold; margin-left: 30px">B</span>
+    <span style="color: #00ac00">l</span>
+    <span style="color: #870058; font-weight: bold">O</span>
+    <span style="color: #cf1d35">g</span>
+    <span style="color: #f4b35f; font-weight: bold">S</span>
+  </p>
+  <div class="serchBar">
+    <form
+      action="/searchTitle"
+      method="post"
+      class="form-inline"
+      align="center"
+    >
+      <input
+        class="form-control mr-sm-2"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+        name="titleToSearch"
+      />
+      <button
+        class="btn btn-outline-success my-2 my-sm-0"
+        type="submit"
+        style="border-radius: 50%; width: 40px; height: 40px"
+      >
+        <i class="fa fa-search"></i>
+      </button>
+    </form>
+  </div>
+</nav>
+<%-include("./modals.ejs")%>
+<div class="cardContainer">
+  <%for (let i = 0 ; i < allBlogs.length ; i++){ %>
+  <div class="card" style="width: 18rem">
+    <img
+      class="card-img-top"
+      src="./imgs/<%=i%>-286x180.jpg"
+      alt="Card image cap"
+    />
+    <div class="card-body">
+      <h5 class="card-title" id="title<%=allBlogs[i].id%>">
+        <%=allBlogs[i].title%>
+      </h5>
+      <p class="card-text" id="content<%=allBlogs[i].id%>">
+        <%=allBlogs[i].content%>
+      </p>
+      <a
+        href=""
+        class="btn btn-warning"
+        data-toggle="modal"
+        data-target="#updateBlogModal"
+        onclick="getBlogIdToUpdate('<%=allBlogs[i].id%>')"
+        >Edit</a
+      >
+      <a
+        href=""
+        class="btn btn-danger"
+        data-toggle="modal"
+        data-target="#deleteBlogModal"
+        onclick="getBlogIdToDelete('<%=allBlogs[i].id%>')"
+        >Delete</a
+      >
+    </div>
+  </div>
+  <%}%>
+</div>
+<a
+  type="button"
+  class="btn btn-primary addNewBlog"
+  data-toggle="modal"
+  data-target="#addNewBlogModal"
+  style="color: #fff; background-color: #870058; border-color: #870058"
+  >Add New Blog</a
+>
+<%-include("./footer.ejs")%>

@@ -1,0 +1,57 @@
+<%-include("./header.ejs")%>
+<nav>
+  <p align="center" class="title">
+    <span style="color: #870058; font-weight: bold">R</span>
+    <span style="color: #cf1d35">e</span>
+    <span style="color: #f4b35f; font-weight: bold">S</span>
+    <span style="color: #fe5d26; font-weight: bold">u</span>
+    <span style="color: #00ac00">l</span>
+    <span style="color: #870058; font-weight: bold">T</span>
+    <span style="color: #00ac00;">s</span>
+  </p>
+</nav>
+<%-include("./modals.ejs")%>
+<div class="cardContainer">
+  <%for (let i = 0 ; i < allBlogs.length ; i++){ %>
+  <div class="card" style="width: 18rem">
+    <img
+      class="card-img-top"
+      src="./imgs/<%=i%>-286x180.jpg"
+      alt="Card image cap"
+    />
+    <div class="card-body">
+      <h5 class="card-title" id="title<%=allBlogs[i].id%>">
+        <%=allBlogs[i].title%>
+      </h5>
+      <p class="card-text" id="content<%=allBlogs[i].id%>">
+        <%=allBlogs[i].content%>
+      </p>
+      <a
+        href=""
+        class="btn btn-warning"
+        data-toggle="modal"
+        data-target="#updateBlogModal"
+        onclick="getBlogIdToUpdate('<%=allBlogs[i].id%>')"
+        >Edit</a
+      >
+      <a
+        href=""
+        class="btn btn-danger"
+        data-toggle="modal"
+        data-target="#deleteBlogModal"
+        onclick="getBlogIdToDelete('<%=allBlogs[i].id%>')"
+        >Delete</a
+      >
+    </div>
+  </div>
+  <%}%>
+</div>
+<form action="/getAllBlogs" method="post"></form>
+<a
+  type="button"
+  href="/getAllBlogs"
+  class="btn btn-primary addNewBlog"
+  style="color: #fff; background-color: #870058; border-color: #870058"
+  >Home</a
+>
+<%-include("./footer.ejs")%>
