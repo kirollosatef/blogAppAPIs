@@ -1,12 +1,10 @@
-let connection = require("../middleware/sequelize.connection");
-let sequelize = require("sequelize");
+const connection = require("../middleware/sequelize.connection");
+const sequelize = require("sequelize");
 
 let blog = connection.define("blogs", {
   title: sequelize.STRING,
   content: sequelize.STRING,
 });
-
-let getAllBlogs
 
 module.exports = blog;
 
