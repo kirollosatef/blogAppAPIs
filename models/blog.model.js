@@ -6,6 +6,8 @@ let blog = connection.define("blogs", {
   content: sequelize.STRING,
 });
 
+let getAllBlogs
+
 module.exports = blog;
 
 // INSERT INTO `blogs`(`title`, `content`)

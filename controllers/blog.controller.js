@@ -38,7 +38,7 @@ let searchTitle = async (req, res) => {
   let blogsData = await Blog.findAll({
     where: { title: { [Op.like]: `%${blogTitle}%` } },
   });
-  if (blogsData.length > 1) {
+  if (blogsData.length > 1 && blogTitle == " ") {
     res.render("searchBlog.ejs", { allBlogs: blogsData });
   } else {
     res.render("notFound.ejs");
